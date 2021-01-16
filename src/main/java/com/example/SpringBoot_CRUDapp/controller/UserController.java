@@ -35,7 +35,12 @@ public class UserController {
     }
 
     @GetMapping(value = "/login")
-    public String getLoginPage(Model model){
+    public String getLoginPage(){
+        return "login";
+    }
+
+    @GetMapping(value = "/user")
+    public String getUserInfo(Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = (User) authentication.getPrincipal();
         model.addAttribute("mail", user.getMail());
