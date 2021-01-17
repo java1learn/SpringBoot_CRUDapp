@@ -5,6 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -18,7 +19,7 @@ public class User implements UserDetails {
     @Column(name = "login", unique = true)
     private String login;
 
-    @Column(name = "lastName")
+    @Column(name = "last_Name")
     private String lastName;
 
     @Column(name = "department")
@@ -97,8 +98,14 @@ public class User implements UserDetails {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setRoles(String roles) {
+        this.roles = new HashSet<>();
+        if (roles.contains("ROLE_ADMIN")) {
+            this.roles.add(new Role("ROLE_ADMIN"));
+        }
+        if (roles.contains("ROLE_USER")) {
+            this.roles.add(new Role("ROLE_USER"));
+        }
     }
 
     public void setPassword(String password) {

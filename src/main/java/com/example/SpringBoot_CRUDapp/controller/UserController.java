@@ -49,7 +49,7 @@ public class UserController {
         model.addAttribute("lastName",user.getLastName());
         model.addAttribute("department",user.getDepartment());
         model.addAttribute("login", user.getUsername());
-        model.addAttribute("roles", user.getAuthorities());
+        model.addAttribute("roles", user.getRoles());
         return "user";
     }
 
