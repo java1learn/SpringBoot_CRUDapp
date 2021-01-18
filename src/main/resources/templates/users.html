@@ -219,10 +219,10 @@
                                                                         </button>
                                                                     </div>
                                                                     <div class="modal-body bg-white">
-                                                                        <form id="formDeleteUser" th:attrappend="id=${user.id}"
-                                                                              method="post"
-                                                                              th:action="@{admin/delete/{id}(id=${user.id})}"
-                                                                              class="form-signin mx-auto font-weight-bold text-center">
+                                                                        <form id="formDeleteUser"
+                                                                            th:attrappend="id=${user.id}" method="post"
+                                                                            th:action="@{admin/delete/{id}(id=${user.id})}"
+                                                                            class="form-signin mx-auto font-weight-bold text-center">
                                                                             <p>
                                                                                 <label for="id">ID</label>
                                                                                 <input
@@ -343,16 +343,16 @@
                                                 <p>
                                                     <label for="newPassword">Password</label>
                                                     <input class="form-control form-control-sm" type="password"
-                                                        name="password" id="newPassword" placeholder="Password" required>
+                                                        name="password" id="newPassword" placeholder="Password"
+                                                        required>
                                                 </p>
-                                                
+
                                                 <p>
                                                     <label for="newRoles">Role</label>
-                                                    <select class="form-control form-control-sm" id="newRoles" name="roles" multiple
-                                                            size="2" required>
-                                                        <option th:each="role : ${allRoles}"
-                                                                th:value="${role}"
-                                                                th:text="${role.roleName}"></option>
+                                                    <select class="form-control form-control-sm" id="newRoles"
+                                                        name="roles" multiple size="2" required>
+                                                        <option th:each="role : ${allRoles}" th:value="${role}"
+                                                            th:text="${role.roleName}"></option>
                                                     </select>
                                                 </p>
 
@@ -365,13 +365,44 @@
                             </div>
 
 
+                            <div class="tab-pane fade pl-3" style="height: 700px;" id="user_panel" role="tabpanel"
+                                aria-labelledby="user_panel">
+                                <h1>User information-page</h1>
+                                <div class="pl-3 pt-1 d-flex border-top border-left border-right">
+                                    <h4> About user</h4>
+                                </div>
+                                <div class="bg-white border p-3">
+                                    <table class="table table-striped border-top">
+                                        <thead>
+                                            <tr>
+                                                <th>id</th>
+                                                <th>name</th>
+                                                <th>lastName</th>
+                                                <th>department</th>
+                                                <th>mail</th>
+                                                <th>password</th>
+                                                <th>roles</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td th:utext="${id}">id</td>
+                                                <td th:utext="${login}">Name</td>
+                                                <td th:utext="${lastName}">LastName</td>
+                                                <td th:utext="${department}">Department</td>
+                                                <td th:utext="${mail}">Mail</td>
+                                                <td th:utext="${password}">Password</td>
+                                                <td th:utext="${roles}">roles</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
-
-
-
 
         </div>
     </div>
