@@ -219,10 +219,10 @@
                                                                         </button>
                                                                     </div>
                                                                     <div class="modal-body bg-white">
-                                                                        <form id="formDeleteUser"
-                                                                            th:attrappend="id=${user.id}" method="post"
-                                                                            th:action="@{/admin/edit}"
-                                                                            class="form-signin mx-auto font-weight-bold text-center">
+                                                                        <form id="formDeleteUser" th:attrappend="id=${user.id}"
+                                                                              method="post"
+                                                                              th:action="@{admin/delete/{id}(id=${user.id})}"
+                                                                              class="form-signin mx-auto font-weight-bold text-center">
                                                                             <p>
                                                                                 <label for="id">ID</label>
                                                                                 <input
@@ -299,7 +299,9 @@
                                                                             data-dismiss="modal">Close
                                                                         </button>
                                                                     </div>
-
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </td>
                                                 </tr>
 

@@ -15,11 +15,12 @@ public class Role implements GrantedAuthority {
     @Column(name = "role_Name")
     private String roleName;
 
-//    @Transient
+    @Transient
     @ManyToMany(mappedBy = "roles")
     private List<User> users;
 
-    public Role(){}
+    public Role() {
+    }
 
     public Role(String roleName) {
         if (roleName.contains("ADMIN")) {
