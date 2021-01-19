@@ -17,41 +17,48 @@ import java.util.List;
 @Controller
 @RequestMapping("/")
 public class UserController {
-    private UserRepository userRepository;
 
-    @Autowired
-    public void setUserRepository(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    @GetMapping("/user")
+    public String getUserPage(){
+        return "user";
     }
 
-    @GetMapping(value = "/")
-    public String printWelcome(Model model){
-        List<String> messages = new ArrayList<>();
-        messages.add("Hello!");
-        messages.add("I'm Spring MVC-SECURITY application");
-        messages.add("5.2.0 version by sep'19 ");
-        model.addAttribute("messages", messages);
-        return "hello";
-    }
+
+//    private UserRepository userRepository;
+//
+//    @Autowired
+//    public void setUserRepository(UserRepository userRepository) {
+//        this.userRepository = userRepository;
+//    }
+//
+//    @GetMapping(value = "/")
+//    public String printWelcome(Model model){
+//        List<String> messages = new ArrayList<>();
+//        messages.add("Hello!");
+//        messages.add("I'm Spring MVC-SECURITY application");
+//        messages.add("5.2.0 version by sep'19 ");
+//        model.addAttribute("messages", messages);
+//        return "hello";
+//    }
 
     @GetMapping(value = "/login")
     public String getLoginPage(){
         return "login";
     }
-
-    @GetMapping(value = "/user")
-    public String getUserInfo(Model model){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = (User) authentication.getPrincipal();
-        model.addAttribute("mail", user.getMail());
-        model.addAttribute("id", user.getId());
-        model.addAttribute("password", user.getPassword());
-        model.addAttribute("lastName",user.getLastName());
-        model.addAttribute("department",user.getDepartment());
-        model.addAttribute("login", user.getUsername());
-        model.addAttribute("roles", user.getRoles());
-        return "user";
-    }
+//
+//    @GetMapping(value = "/user")
+//    public String getUserInfo(Model model){
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        User user = (User) authentication.getPrincipal();
+//        model.addAttribute("mail", user.getMail());
+//        model.addAttribute("id", user.getId());
+//        model.addAttribute("password", user.getPassword());
+//        model.addAttribute("lastName",user.getLastName());
+//        model.addAttribute("department",user.getDepartment());
+//        model.addAttribute("login", user.getUsername());
+//        model.addAttribute("roles", user.getRoles());
+//        return "user";
+//    }
 
 
 
