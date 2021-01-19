@@ -47,4 +47,5 @@ public class UserServiceImpl implements UserService {
     public Optional<User> findByLogin(String userName) {
         return userRepository.findByLogin(userName);
     }
+
 }

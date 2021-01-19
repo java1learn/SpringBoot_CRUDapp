@@ -8,4 +8,5 @@ import java.util.Set;
 @Service
 public interface RoleService {
     Set<Role> getAllRoles();
+
 }

@@ -19,4 +19,5 @@ public class RoleServiceImpl implements RoleService {
     public Set<Role> getAllRoles() {
         return (Set<Role>) repository.findAll();
     }
+
 }
