@@ -1,7 +1,7 @@
 package com.example.SpringBoot_CRUDapp.controller;
 
 import com.example.SpringBoot_CRUDapp.model.User;
-import com.example.SpringBoot_CRUDapp.repository.UserRepository;
+import com.example.SpringBoot_CRUDapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,17 +12,17 @@ import java.util.List;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-
-    private final UserRepository userRepository;
+  
+    private final UserService userService;
 
     @Autowired
-    public AdminController(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public AdminController(UserService userService) {
+        this.userService = userService;
     }
 
     @GetMapping("")
     public String printUser(Model model){
-        List<User> userList = (List<User>) userRepository.findAll();
+        List<User> userList = (List<User>) userService.getAllUsers();
         model.addAttribute("users",userList);
         return "users";
     }
@@ -36,27 +36,27 @@ public class AdminController {
 
     @PostMapping("admin/addUser")
     public String addUser(@ModelAttribute("user") User user){
-        userRepository.save(user);
+        userService.createUser(user);
         return "redirect:/admin";
     }
 
     @GetMapping("/edit/{id}")
     public String editUser(@PathVariable("id") long id, Model model){
-        model.addAttribute("user",userRepository.findById(id));
+        model.addAttribute("user",userService.getUserById(id));
         return "editUser";
     }
 
     @PostMapping("/edit")
     public String editUser(@ModelAttribute("user") User user){
-        userRepository.save(user);
+        userService.updateUser(user);
         return "redirect:/admin";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteUser(@PathVariable("id") long id) {
-        User user = userRepository.findById(id)
+        User user = userService.getUserById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
-        userRepository.delete(user);
+        userService.deleteUser(user);
         return "redirect:/admin";
     }
 }
