@@ -1,11 +1,11 @@
 var API = function () {
     return {
         getUsers: function (callback) {
-            $.get("/api/users", callback);
+            $.get("/rest/getAllUsers", callback);
         },
         saveUser: function (user, callback) {
             $.ajax({
-                url: '/api/users',
+                url: '/rest/update',
                 type: 'PUT',
                 data: JSON.stringify(user),
                 contentType: "application/json; charset=utf-8",
@@ -14,7 +14,7 @@ var API = function () {
         },
         deleteUser: function (id, callback) {
             $.ajax({
-                url: '/api/users/' + id,
+                url: '/rest/delete/' + id,
                 type: 'DELETE',
                 success: callback
             });
