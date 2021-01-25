@@ -15,15 +15,12 @@
 <div>
 
     <nav class="navbar navbar-dark bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" th:utext="${autUser.email + ' with roles: ' +
-        #strings.listJoin(autUser.getRoleTitles(), ', ')}">Email</a>
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="/logout">Logout</a>
-                </li>
-            </ul>
-        </div>
+        <a class="navbar-text" style="color:white;"><strong th:utext="${login}"></strong> with roles: <strong
+                th:utext="${roles}"></strong></a>
+        <
+        <form class="form-inline">
+            <a style="color:grey;" th:href="@{/logout}" type="submit">Logout</a>
+        </form>
     </nav>
 
 </div>
@@ -38,10 +35,10 @@
 
                 <a sec:authorize="hasRole('ROLE_ADMIN')" class="nav-link"
                    th:classappend="${autUser.getRoleTitles().contains('ROLE_ADMIN')} ? 'active' : ''"
-                   data-bs-toggle="pill" href="#adminPanelPage">Admin</a>
+                   data-bs-toggle="pill" href="#adminpanelmail">Admin</a>
 
                 <a class="nav-link" th:classappend="${!autUser.getRoleTitles().contains('ROLE_ADMIN')} ? 'active' : ''"
-                   data-bs-toggle="pill" href="#userPage">User</a>
+                   data-bs-toggle="pill" href="#userPdepartment">User</a>
 
             </div>
         </div>
@@ -52,7 +49,7 @@
 
                 <div class="tab-pane fade"
                      th:classappend="${autUser.getRoleTitles().contains('ROLE_ADMIN')} ? 'show active' : ''"
-                     id="adminPanelPage" role="tabpanel">
+                     id="adminpanelmail" role="tabpanel">
 
                     <div><h1>Admin panel</h1></div>
 
@@ -84,9 +81,9 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>Name</th>
-                                            <th>Surname</th>
-                                            <th>Age</th>
-                                            <th>Email</th>
+                                            <th>lastName</th>
+                                            <th>department</th>
+                                            <th>mail</th>
                                             <th>Role</th>
                                             <th>Edit</th>
                                             <th>Delete</th>
@@ -111,40 +108,33 @@
                             <div class="card">
 
                                 <h5 class="card-header">Add new user</h5>
-
                                 <div class="card-block mx-auto p-2">
-
                                     <form class="text-center fw-bold">
-
                                         <div class="form-group">
-
                                             <label class="col-form-label" for="first-name1">First
                                                 name</label>
-
                                             <input class="form-control" id="first-name1"
                                                    name="name" type="text">
+                                        </div>
 
+                                        <div class="form-group">
+
+                                            <label class="col-form-label" for="lastName1">lastName</label>
+                                            <input class="form-control" id="lastName1" name="lastName" type="text">
 
                                         </div>
 
                                         <div class="form-group">
 
-                                            <label class="col-form-label" for="surname1">Surname</label>
-                                            <input class="form-control" id="surname1" name="surname" type="text">
+                                            <label class="col-form-label" for="department1">department</label>
+                                            <input class="form-control" id="department1" max="128" min="1" name="department" size="3" type="text" value="">
 
                                         </div>
 
                                         <div class="form-group">
 
-                                            <label class="col-form-label" for="age1">Age</label>
-                                            <input class="form-control" id="age1" max="128" min="1" name="age" size="3" type="number" value="">
-
-                                        </div>
-
-                                        <div class="form-group">
-
-                                            <label class="col-form-label" for="email1">Email</label>
-                                            <input class="form-control" id="email1" name="email" type="text">
+                                            <label class="col-form-label" for="mail1">mail</label>
+                                            <input class="form-control" id="mail1" name="mail" type="text">
                                         </div>
 
                                         <div class="form-group">
@@ -190,7 +180,7 @@
 
                 <div class="tab-pane fade"
                      th:classappend="${!autUser.getRoleTitles().contains('ROLE_ADMIN')} ? 'show active' : ''"
-                     id="userPage" role="tabpanel">
+                     id="userPdepartment" role="tabpanel">
 
                     <div><h1>USER INFORMATION</h1></div>
 
@@ -206,9 +196,9 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Name</th>
-                                    <th>Surname</th>
-                                    <th>Age</th>
-                                    <th>Email</th>
+                                    <th>lastName</th>
+                                    <th>department</th>
+                                    <th>mail</th>
                                     <th>Role</th>
                                 </tr>
 
@@ -218,9 +208,9 @@
                                 <tr th:object="${autUser}">
                                     <td th:text="*{id}">id</td>
                                     <td th:text="*{name}">name</td>
-                                    <td th:text="*{surname}">surname</td>
-                                    <td th:text="*{age}">age</td>
-                                    <td th:text="*{email}">email</td>
+                                    <td th:text="*{lastName}">lastName</td>
+                                    <td th:text="*{department}">department</td>
+                                    <td th:text="*{mail}">mail</td>
                                     <td>
                                         <span th:text="${#strings.listJoin(autUser.getRoleTitles(), ', ')}">role</span>
                                     </td>
@@ -267,57 +257,44 @@
                 <div class="modal-body mx-auto text-center fw-bold">
 
                     <div class="form-group">
-
                         <label class="col-form-label" for="userId">ID</label>
                         <input class="form-control" id="userId"
                                name="id" readonly type="text" value="">
-
                     </div>
 
                     <div class="form-group">
-
-                        <label class="col-form-label" for="userFirstName">First name</label>
-                        <input class="form-control" id="userFirstName"
+                        <label class="col-form-label" for="login">First name</label>
+                        <input class="form-control" id="login"
                                name="name" type="text" value="">
-
                     </div>
 
                     <div class="form-group">
-
-                        <label class="col-form-label" for="userSurname">Surname</label>
-                        <input class="form-control" id="userSurname" name="surname" type="text" value="">
-
+                        <label class="col-form-label" for="lastName">lastName</label>
+                        <input class="form-control" id="lastName" name="lastName" type="text" value="">
                     </div>
 
                     <div class="form-group">
-
                         <label class="col-form-label"
-                               for="userAge">Age</label>
-                        <input class="form-control" id="userAge"
-                               max="128" min="1" name="age"
-                               size="3" type="number" value="">
-
+                               for="department">department</label>
+                        <input class="form-control" id="department"
+                               max="128" min="1" name="department"
+                               size="3" type="text" value="">
                     </div>
 
                     <div class="form-group">
-
                         <label class="col-form-label"
-                               for="userEmail">Email</label>
-                        <input class="form-control" id="userEmail"
-                               name="email" type="text" value="">
-
+                               for="mail">mail</label>
+                        <input class="form-control" id="mail"
+                               name="mail" type="text" value="">
                     </div>
 
                     <div class="form-group">
-
-                        <label class="col-form-label" for="userPassword">Password</label>
-                        <input class="form-control" id="userPassword"
+                        <label class="col-form-label" for="password">Password</label>
+                        <input class="form-control" id="password"
                                name="password" type="password" value="">
-
                     </div>
 
                     <div class="form-group">
-
                         <label class="col-form-label" for="userRoles">Role</label>
                         <select class="custom-select form-control"
                                 id="userRoles" multiple name="roles">
@@ -327,7 +304,6 @@
                                     th:value="${oneRole.id}">all roles
                             </option>
                         </select>
-
                     </div>
 
                 </div>
@@ -391,37 +367,36 @@
 
                     <div class="form-group">
 
-                        <label class="col-form-label" for="firstNameDelete">First
+                        <label class="col-form-label" for="loginDelete">First
                             name</label>
                         <input class="form-control" name="name" readonly
-                               id="firstNameDelete" value="" type="text">
+                               id="loginDelete" value="" type="text">
 
                     </div>
 
                     <div class="form-group">
 
-                        <label class="col-form-label" for="surnameDelete">Surname</label>
-                        <input class="form-control" name="surname" readonly
-                               id="surnameDelete" value="" type="text">
-
-                    </div>
-
-                    <div class="form-group">
-
-                        <label class="col-form-label"
-                               for="ageDelete">Age</label>
-                        <input class="form-control" max="128"
-                               min="1" name="age" readonly size="3"
-                               id="ageDelete" value="" type="number">
+                        <label class="col-form-label" for="lastNameDelete">lastName</label>
+                        <input class="form-control" name="lastName" readonly
+                               id="lastNameDelete" value="" type="text">
 
                     </div>
 
                     <div class="form-group">
 
                         <label class="col-form-label"
-                               for="emailDelete">Email</label>
-                        <input class="form-control" name="email" readonly
-                               id="emailDelete" value="" type="text">
+                               for="departmentDelete">department</label>
+                        <input class="form-control" name="department" readonly size="3"
+                               id="departmentDelete" value="" type="text">
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label class="col-form-label"
+                               for="mailDelete">mail</label>
+                        <input class="form-control" name="mail" readonly
+                               id="mailDelete" value="" type="text">
 
                     </div>
 

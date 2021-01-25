@@ -5,7 +5,7 @@ import com.example.SpringBoot_CRUDapp.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Set;
+import java.util.List;
 
 @Service
 public class RoleServiceImpl implements RoleService {
@@ -18,8 +18,8 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public Set<Role> getAllRoles() {
-        return (Set<Role>) repository.findAll();
+    public List<Role> getAllRoles() {
+        return (List<Role>) repository.findAll();
     }
 
 }

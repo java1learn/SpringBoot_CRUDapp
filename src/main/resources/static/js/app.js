@@ -68,11 +68,11 @@ $(function () {
                 var editModal = $('#editModal');
                 var tdArray = $(this).parent().parent().find('td');
                 editModal.find('#userId').val(tdArray[0].innerText);
-                editModal.find('#userFirstName').val(tdArray[1].innerText);
-                editModal.find('#userSurname').val(tdArray[2].innerText);
-                editModal.find('#userAge').val(tdArray[3].innerText);
-                editModal.find('#userEmail').val(tdArray[4].innerText);
-                editModal.find('#userPassword').val(tdArray[5].innerText);
+                editModal.find('#login').val(tdArray[1].innerText);
+                editModal.find('#lastName').val(tdArray[2].innerText);
+                editModal.find('#department').val(tdArray[3].innerText);
+                editModal.find('#mail').val(tdArray[4].innerText);
+                editModal.find('#password').val(tdArray[5].innerText);
                 var userRoles = tdArray[6].innerText.split(", ");
                 editModal.find('#userRoles option').each(function () {
                     $(this).attr('selected', userRoles.includes($(this).text()));
@@ -99,11 +99,11 @@ $(function () {
                 var deleteModal = $('#deleteModal');
                 var tdArray = $(this).parent().parent().find('td');
                 deleteModal.find('#userIdDelete').val(tdArray[0].innerText);
-                deleteModal.find('#firstNameDelete').val(tdArray[1].innerText);
-                deleteModal.find('#surnameDelete').val(tdArray[2].innerText);
-                deleteModal.find('#ageDelete').val(tdArray[3].innerText);
-                deleteModal.find('#emailDelete').val(tdArray[4].innerText);
-                deleteModal.find('#userPasswordDelete').val(tdArray[5].innerText).hide();
+                deleteModal.find('#loginDelete').val(tdArray[1].innerText);
+                deleteModal.find('#lastNameDelete').val(tdArray[2].innerText);
+                deleteModal.find('#departmentDelete').val(tdArray[3].innerText);
+                deleteModal.find('#mailDelete').val(tdArray[4].innerText);
+                deleteModal.find('#passwordDelete').val(tdArray[5].innerText).hide();
                 var userRoles = tdArray[6].innerText.split(", ");
                 deleteModal.find('#userRolesDelete option').each(function () {
                     $(this).attr('selected', userRoles.includes($(this).text()));
