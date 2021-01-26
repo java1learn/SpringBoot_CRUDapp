@@ -1,5 +1,7 @@
 package com.example.SpringBoot_CRUDapp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -7,6 +9,7 @@ import javax.persistence.*;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "users")
@@ -32,9 +35,10 @@ public class User implements UserDetails {
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
+    @JsonIgnore
     private Set<Role> roles;
 
-   public User() {
+    public User() {
     }
 
     public User(String login, String lastName, String department, String mail, String password, Set<Role> roles) {
@@ -91,6 +95,19 @@ public class User implements UserDetails {
 
     public Set<Role> getRoles() {
         return roles;
+    }
+
+    public Set<String> getRoleTitles() {
+        return roles.stream()
+                .map(Role::getRoleName)
+                .collect(Collectors.toSet());
+    }
+
+    @JsonProperty("roles")
+    public void setRoleTitles(Set<Long> roleTitles) {
+        roles = roleTitles.stream()
+                .map(id -> new Role(id, null))
+                .collect(Collectors.toSet());
     }
 
     public void setRoles(String roles) {

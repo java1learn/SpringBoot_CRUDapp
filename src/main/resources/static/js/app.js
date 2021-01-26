@@ -37,7 +37,7 @@ $(function () {
 
                         .append($('<td/>').text(user.id))
 
-                        .append($('<td/>').text(user.name))
+                        .append($('<td/>').text(user.login))
 
                         .append($('<td/>').text(user.lastName))
 
