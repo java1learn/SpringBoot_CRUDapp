@@ -44,7 +44,12 @@ public class initService {
         roles.add(roleService.getRoleById(1L));
 
         userService.createUser(new User(
-                "admin", "testAdminUser", "IT", "admin@admin.com", "admin", roles
+                "admin",
+                "testAdminUser",
+                "IT",
+                "admin@admin.com",
+                "admin",
+                roles
         ));
     }
 }
